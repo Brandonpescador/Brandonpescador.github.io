@@ -1,53 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formateador de Cadena</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatear Cadena</title>
 </head>
 <body>
-    <!-- Un input para ingresar una cadena de texto -->
-    <input type="text" id="cadenaInput" placeholder="Ingresa una cadena">
-    <!-- Un botón que llama a la función 'formatearCadena' cuando se hace clic -->
-    <button onclick="formatearCadena()">Formatear</button>
-    <!-- Un párrafo para mostrar el resultado -->
-    <p>Resultado:</p>
-    <p id="resultado"></p>
+    <h2>Formatear Cadena</h2>
+    <label for="cadenaInput">Ingrese una cadena:</label>
+    <input type="text" id="cadenaInput" onkeydown="formatearCadena(event)">
+    <script src="index.js"></script>
 
-    <script>
-        // Evento que permite agregar un tab ('\t') en el input cuando se presiona la tecla Tab
-        document.getElementById("cadenaInput").addEventListener("keydown", function(e) {
-            if (e.key === "Tab") {
-                e.preventDefault(); // Evita que se agregue un tab normalmente
-                var input = this;
-                var start = input.selectionStart;
-                var end = input.selectionEnd;
-                // Inserta un tab en la posición del cursor
-                input.value = input.value.substring(0, start) + "\t" + input.value.substring(end);
-                input.selectionStart = input.selectionEnd = start + 1; // Mueve el cursor después del tab
-            }
-        });
+    <div>
+        <h3>Resultado:</h3>
+        <p id="resultado"></p>
+    </div>
 
-        // Función para formatear una cadena de texto
-        function formatearCadena() {
-            var cadenaInput = document.getElementById("cadenaInput").value;
-            var resultado = document.getElementById("resultado");
-
-            cadenaInput = cadenaInput.trim(); // Elimina espacios en blanco al inicio y final
-            cadenaInput = cadenaInput.replace(/\t/g, ' ').replace(/\n/g, ' '); // Reemplaza tabulaciones y saltos de línea con espacios
-
-            var palabras = cadenaInput.split(' '); // Divide la cadena en palabras
-
-            // Capitaliza la primera letra y convierte el resto de cada palabra en minúsculas
-            for (var i = 0; i < palabras.length; i++) {
-                palabras[i] = palabras[i].charAt(0).toUpperCase() + palabras[i].slice(1).toLowerCase();
-            }
-
-            var cadenaFormateada = palabras.join(' '); // Une las palabras formateadas en una sola cadena
-
-            resultado.textContent = cadenaFormateada; // Muestra la cadena formateada en la página
-        }
-    </script>
 </body>
 </html>
-
